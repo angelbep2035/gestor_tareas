@@ -76,19 +76,16 @@ WSGI_APPLICATION = 'gestor_tareas.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-import os
 import dj_database_url
+import os
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'gestor_tareas_db',  # Nombre de la base de datos
-        'USER': 'gestor_tareas_db_user',  # Usuario de la base de datos
-        'PASSWORD': 'ibX4hCI2n9jGWBM6JrB8E7ph2SfkkPxN',  # (Pon aquí la contraseña completa)
-        'HOST': 'dpg-cuj478hu0jms73dgblf0-a',  # (Pon aquí el hostname completo)
-        'PORT': '5432',  # Puerto de PostgreSQL
-    }
+    'default': dj_database_url.config(
+        default="postgresql://gestor_tareas_db_user:ibX4hCI2n9jGWBM6JrB8E7ph2SfkkPxN@dpg-cuj478hu0jms73dgblf0-a.oregon-postgres.render.com/gestor_tareas_db",
+        conn_max_age=600, ssl_require=True
+    )
 }
+
 
 
 
