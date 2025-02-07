@@ -52,18 +52,17 @@ REST_FRAMEWORK = {
 AUTH_USER_MODEL = 'tareas.Usuario'
 ALLOWED_HOSTS = ["*"]
 
-
-
-
 MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",  # Agregar esta línea
+    "django.contrib.sessions.middleware.SessionMiddleware",
+    "django.middleware.common.CommonMiddleware",
+    "django.middleware.csrf.CsrfViewMiddleware",
+    "django.contrib.auth.middleware.AuthenticationMiddleware",
+    "django.contrib.messages.middleware.MessageMiddleware",
+    "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
+
 
 ROOT_URLCONF = 'gestor_tareas.urls'
 
@@ -132,23 +131,26 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 import os
 
-STATIC_URL = '/static/'
+STATIC_URL = "/static/"
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
 
-# Configuración para que Render pueda servir archivos estáticos
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+# Configuración para permitir que Render sirva archivos estáticos
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
-# Permitir archivos estáticos desde DRF-YASG
+# Configuración para Swagger (drf-yasg)
 SWAGGER_SETTINGS = {
-    'USE_SESSION_AUTH': False,
-    'PERSIST_AUTH': True,
-    'SECURITY_DEFINITIONS': {
-        'Bearer': {
-            'type': 'apiKey',
-            'name': 'Authorization',
-            'in': 'header',
+    "USE_SESSION_AUTH": False,
+    "PERSIST_AUTH": True,
+    "SECURITY_DEFINITIONS": {
+        "Bearer": {
+            "type": "apiKey",
+            "name": "Authorization",
+            "in": "header",
         },
     },
 }
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
