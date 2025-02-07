@@ -3,10 +3,6 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
-
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-8-74&50zobrf3&y0fp3e9-f-v#3k%p-mi1bf%ryai(7g6-xof_'
 
@@ -39,11 +35,11 @@ REST_FRAMEWORK = {
 }
 
 AUTH_USER_MODEL = 'tareas.Usuario'
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ["*"] #Permitir cualquier puerto
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
-    "whitenoise.middleware.WhiteNoiseMiddleware",  # Agregar esta línea
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -75,9 +71,7 @@ TEMPLATES = [
 WSGI_APPLICATION = 'gestor_tareas.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/5.1/ref/settings/#databases
-
+#Conexion a la base de datos
 import dj_database_url
 import os
 
@@ -87,11 +81,7 @@ DATABASES = {
 }
 
 
-
-
-
-# Password validation
-# https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
+#Validacion de contraseñas
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -110,7 +100,6 @@ AUTH_PASSWORD_VALIDATORS = [
 
 
 # Internationalization
-# https://docs.djangoproject.com/en/5.1/topics/i18n/
 
 LANGUAGE_CODE = 'en-us'
 

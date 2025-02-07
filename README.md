@@ -19,14 +19,22 @@ pip install -r requirements.txt
 python manage.py makemigrations tareas
 python manage.py migrate
 
-Crear un Usuario Administrador (Opcional para Django Admin)
-python manage.py createsuperuser
+//Creación de usuarios en la base de datos
+python manage.py shell
+from django.contrib.auth.hashers import make_password
+print(make_password("TuContraseñaSegura"))
+//Ejemplo salida: pbkdf2_sha256$870000$DGwxpKuS4hG5xGyYf3n2dJ$ZnIqG313vJWw1DYT9gLJAXwjygbPK7f71ZzACCLUX4Q=
 
-//Crear usuario normal
+//Insertar un usuario en PostgreSQL directamente
+INSERT INTO tareas_usuario (username, email, password, first_name, last_name, is_superuser, is_staff, is_active, date_joined)
+VALUES ('admin', 'admin@example.com', 'pbkdf2_sha256$870000$DGwxpKuS4hG5xGyYf3n2dJ$ZnIqG313vJWw1DYT9gLJAXwjygbPK7f71ZzACCLUX4Q=', 'Admin', 'User', TRUE, TRUE, TRUE, NOW());
+
+Crear usuario normal desde Django Shell
 python manage.py shell
 from tareas.models import Usuario
 usuario = Usuario.objects.create_user(username="usuario", email="usuario@example.com", password="contraseña")
 exit()
+
 
 //Ejecutar el Servidor
 python manage.py runserver
@@ -36,5 +44,5 @@ python manage.py test
 
 Documentación Swagger
 Se ha integrado drf-yasg para generar documentación interactiva.
-Swagger UI: http://127.0.0.1:8000/swagger/
-Redoc: http://127.0.0.1:8000/redoc/
+Swagger UI: https://gestor-tareas-sq08.onrender.com/swagger/
+Redoc: https://gestor-tareas-sq08.onrender.com/redoc/
