@@ -25,6 +25,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'whitenoise.runserver_nostatic',  # Instalacion de whitehoise
     'rest_framework',  # Para las API REST 
     'rest_framework_simplejwt',  # Para autenticación con JWT
     'drf_yasg', #Para la documentacion
@@ -49,6 +50,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 
@@ -79,12 +81,11 @@ WSGI_APPLICATION = 'gestor_tareas.wsgi.application'
 import dj_database_url
 import os
 
+import dj_database_url
 DATABASES = {
-    'default': dj_database_url.config(
-        default="postgresql://gestor_tareas_db_user:ibX4hCI2n9jGWBM6JrB8E7ph2SfkkPxN@dpg-cuj478hu0jms73dgblf0-a.oregon-postgres.render.com/gestor_tareas_db",
-        conn_max_age=600, ssl_require=True
-    )
+    'default': dj_database_url.config(default='postgresql://gestor_tareas_db_user:ibX4hCI2n9jGWBM6JrB8E7ph2SfkkPxN@dpg-cuj478hu0jms73dgblf0-a.oregon-postgres.render.com/gestor_tareas_db')
 }
+
 
 
 
