@@ -50,6 +50,9 @@ REST_FRAMEWORK = {
 }
 
 AUTH_USER_MODEL = 'tareas.Usuario'
+ALLOWED_HOSTS = ["*"]
+
+
 
 
 MIDDLEWARE = [
